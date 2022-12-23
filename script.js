@@ -1,5 +1,7 @@
 (function(){
   const dataUrl = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json";
+  colors = ["#ef5350","#EC407A","#AB47BC","#7E57C2","#5C6BC0","#42A5F5","#26C6DA","#26A69A","#D4E157","#FFEE58","#FFA726"],
+  months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   const getData = async () => {
     const response = await fetch(dataUrl);
@@ -8,13 +10,10 @@
   }
 
   const renderData = async () => {
+    
     const data = await getData();
     const dataset = data.monthlyVariance;
     const { baseTemperature } = data;
-    const yearsDate = dataset.map((item)=>{
-      console.log(item.year,item.month)
-      return new Date(item.year, item.month);
-    });
 
     const w = 800;
     const h = 400;
@@ -48,6 +47,11 @@
       .domain(monthsDateObj)
       .range([padding, h - padding])
 
+    const colorScale = d3.scaleQuantize()
+      .domain(d3.extent(dataset,(d)=>d.variance))
+      .range(colors)
+
+    
     // APPEND AXES
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale)
@@ -83,6 +87,8 @@
     .attr("y", d => yScale(d.month))
     .attr("width", 5)
     .attr("height", d => yScale.bandwidth())
+    .attr("fill", (color => colorScale(color)))
+
     
   }
 
