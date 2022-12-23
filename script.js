@@ -47,9 +47,9 @@
       .domain(monthsDateObj)
       .range([padding, h - padding])
 
-    const colorScale = d3.scaleQuantize()
+    const colorScale = d3.scaleLinear()
       .domain(d3.extent(dataset,(d)=>d.variance))
-      .range(colors)
+      .range(["yellow", "red"])
 
     
     // APPEND AXES
