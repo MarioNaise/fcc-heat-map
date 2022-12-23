@@ -20,6 +20,9 @@
 
     const w = 1500;
     const h = 700;
+    const legendW = 300;
+    const legendH = 200;
+    const legendPadding = 20;
     const padding = 80;
 
     const minYear = d3.min(dataset, (d)=>d.year);
@@ -43,6 +46,12 @@
       .select("body")
       .append("div")
       .attr("id", "tooltip")
+
+    // LEGEND
+    const legend = d3
+      .select("body")
+      .append("div")
+      .attr("id", "legend")
 
     // SET SCALES
     const xScale = d3.scaleLinear()
