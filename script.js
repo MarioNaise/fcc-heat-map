@@ -59,7 +59,8 @@
 
     
     // APPEND AXES
-    const xAxis = d3.axisBottom(xScale);
+    const xAxis = d3.axisBottom(xScale)
+      .tickFormat(x => parseInt(x))
     const yAxis = d3.axisLeft(yScale);
     
     
@@ -87,11 +88,9 @@
     .attr("data-month", (d) => d.month)
     .attr("data-year", (d) => d.year)
     .attr("data-temp", baseTemperature)
-    .attr("x", d =>{
-      return xScale(d.year)-padding;
-    })
+    .attr("x", d =>xScale(d.year)-padding)
     .attr("y", d => yScale(months[d.month])-padding)
-    .attr("width", Math.floor((w - padding*2) / (maxYear-minYear)) + "px")
+    .attr("width", (w - padding*2) / (maxYear-minYear) + "px")
     .attr("height", Math.floor((h - padding*2) / 12) + "px")
     .attr("fill", d => colorScale(d.variance))
     .on("mouseover", (e, d)=>{
