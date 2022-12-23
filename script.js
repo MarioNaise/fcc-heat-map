@@ -16,6 +16,13 @@
     // SET DESCRIPTION
     d3.select("#description")
     .text(`${d3.min(dataset.monthlyVariance, (d)=>d.year)} - ${d3.max(dataset.monthlyVariance, (d)=>d.year)}: base temperature ${dataset.baseTemperature}°C`);
+
+    // APPEND SVG
+    const svg = d3.select("main")
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h)
+
   }
 
   renderData();
