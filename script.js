@@ -7,15 +7,17 @@
     return await data;
   }
 
+  const renderData = async () => {
+    const dataset = await getData();
+    const w = 800;
+    const h = 500;
+    const padding = 50;
 
-  const dataset = await getData();
-  const w = 800;
-  const h = 500;
-  const padding = 50;
-
-  // SET DESCRIPTION
-  d3.select("#description")
+    // SET DESCRIPTION
+    d3.select("#description")
     .text(`${d3.min(dataset.monthlyVariance, (d)=>d.year)} - ${d3.max(dataset.monthlyVariance, (d)=>d.year)}: base temperature ${dataset.baseTemperature}°C`);
+  }
 
+  renderData();
   
 })()
