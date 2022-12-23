@@ -11,6 +11,10 @@
     const data = await getData();
     const dataset = data.monthlyVariance;
     const { baseTemperature } = data;
+    const yearsDate = dataset.map((item)=>{
+      console.log(item.year,item.month)
+      return new Date(item.year, item.month);
+    });
 
     const w = 800;
     const h = 400;
@@ -22,6 +26,7 @@
     // SET DESCRIPTION
     d3.select("#description")
     .text(`${minYear} - ${maxYear}: base temperature ${baseTemperature}°C`);
+
 
     // APPEND SVG
     const svg = d3.select("main")
@@ -36,7 +41,7 @@
 
     let monthsDateObj = [];
     for(let i = 0; i < 12; i++){
-      monthsDateObj.push(new Date(2000, i))
+      monthsDateObj.push(new Date(1970, i))
     }
 
     const yScale = d3.scaleBand()
@@ -60,6 +65,24 @@
        .call(yAxis)
        .attr("id", "y-axis");
 
+
+    // APPEND CELLS
+    svg
+    .append("g")
+    .classed("map", true)
+    .attr("transform", "translate(" + padding + "," + padding + ")")
+    .selectAll("rect")
+    .data(dataset)
+    .enter()
+    .append("rect")
+    .attr("class", "cell")
+    .attr("data-month", (d) => d.month)
+    .attr("data-year", (d) => d.year)
+    .attr("data-temp", (d) => data.baseTemperature)
+    .attr("x", d => xScale(d.year))
+    .attr("y", d => yScale(d.month))
+    .attr("width", 5)
+    .attr("height", d => yScale.bandwidth())
     
   }
 
