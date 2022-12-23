@@ -82,12 +82,12 @@
     .attr("class", "cell")
     .attr("data-month", (d) => d.month)
     .attr("data-year", (d) => d.year)
-    .attr("data-temp", (d) => data.baseTemperature)
-    .attr("x", d => xScale(d.year))
+    .attr("data-temp", baseTemperature)
+    .attr("x", (d,i) => xScale(d.year+i))
     .attr("y", d => yScale(d.month))
     .attr("width", 5)
     .attr("height", d => yScale.bandwidth())
-    .attr("fill", (color => colorScale(color)))
+    .attr("fill", (d => colorScale(d.variance)))
 
     
   }
