@@ -1,6 +1,26 @@
 html, body {
   height: 100%;
   width: 100%;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding: 0;
   margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: thin;
+  background: rgb(171,150,32);
+  background: linear-gradient(340deg, rgba(171,150,32,0) 90%, rgba(247,255,0,1) 100%);
+}
+
+#title{
+  font-size: 22px;
+  margin: 2rem;
+}
+
+#description{
+  font-size: 16px;
+  margin: 0.5rem;
 }

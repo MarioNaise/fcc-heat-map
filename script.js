@@ -13,7 +13,7 @@
     const maxYear = d3.max(dataset.monthlyVariance, (d)=>d.year)
     const baseTemp = dataset.baseTemperature
     d3.select("#description")
-    .text(`${minYear} - ${maxYear}: base temperature ${baseTemp}`);
+    .text(`${minYear} - ${maxYear}: base temperature ${baseTemp}°C`);
     
   }
 
