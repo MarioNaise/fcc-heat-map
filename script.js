@@ -18,8 +18,6 @@
 
     const minYear = d3.min(dataset, (d)=>d.year);
     const maxYear = d3.max(dataset, (d)=>d.year);
-    const minMonth = d3.min(dataset, (d)=>d.month);
-    const maxMonth = d3.max(dataset, (d)=>d.month);
 
     // SET DESCRIPTION
     d3.select("#description")
@@ -33,12 +31,17 @@
 
     // SET SCALES
     const xScale = d3.scaleTime()
-      .domain([new Date(minYear.toString()), new Date(maxYear.toString())])
-      .range([padding, w - padding]);
+      .domain([new Date(minYear-5, 1), new Date(maxYear+5, 1)])
+      .range([padding, w - padding])
 
-    const yScale = d3.scaleTime()
-      .domain([new Date("2002-01-01"), new Date("2002-12-31")])
-      .range([padding, h - padding]);
+    let monthsDateObj = [];
+    for(let i = 0; i < 12; i++){
+      monthsDateObj.push(new Date(2000, i))
+    }
+
+    const yScale = d3.scaleBand()
+      .domain(monthsDateObj)
+      .range([padding, h - padding])
 
     // APPEND AXES
     const xAxis = d3.axisBottom(xScale);
