@@ -45,24 +45,22 @@
       .attr("id", "tooltip")
 
     // SET SCALES
-    const xScale = d3.scaleTime()
+    const xScale = d3.scaleLinear()
       .domain([minYear, maxYear])
       .range([padding, w - padding])
 
-    const yScale = d3.scaleLinear()
-      .domain([minMonth, maxMonth])
+    const yScale = d3.scaleBand()
+      .domain(months)
       .range([padding, h - padding])
 
     const colorScale = d3.scaleLinear()
       .domain(d3.extent(dataset,(d)=>d.variance))
-      .range(["white", "red"])
+      .range(["yellow", "red"])
 
     
     // APPEND AXES
     const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale)
-      .ticks(12)
-      .tickFormat(d3.timeFormat("%B"))
+    const yAxis = d3.axisLeft(yScale);
     
     
     svg.append("g")
@@ -92,7 +90,7 @@
     .attr("x", d =>{
       return xScale(d.year)-padding;
     })
-    .attr("y", d => yScale(d.month)-padding-45)
+    .attr("y", d => yScale(months[d.month])-padding)
     .attr("width", Math.floor((w - padding*2) / (maxYear-minYear)) + "px")
     .attr("height", Math.floor((h - padding*2) / 12) + "px")
     .attr("fill", d => colorScale(d.variance))

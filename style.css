@@ -14,7 +14,6 @@ body{
 }
 
 .cell:hover{
-  fill: white;
   outline: 1px solid black;
 }
 
