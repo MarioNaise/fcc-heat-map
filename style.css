@@ -13,6 +13,11 @@ body{
   font-weight: thin;
 }
 
+.cell:hover{
+  fill: white;
+  outline: 1px solid black;
+}
+
 #title{
   font-size: 30px;
   margin: 2rem;
@@ -23,4 +28,15 @@ body{
   font-size: 20px;
   text-align: center;
   margin: 0.5rem;
+}
+
+#tooltip{
+  background-color: rgba(50,50,50 ,.7);
+  position: absolute;
+  color: white;
+  border-radius: 5px;
+  display: none;
+}
+#tooltip p{
+  margin: 1rem;
 }

@@ -38,6 +38,12 @@
       .attr("width", w)
       .attr("height", h)
 
+    // TOOLTIP
+    const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("id", "tooltip")
+
     // SET SCALES
     const xScale = d3.scaleTime()
       .domain([minYear, maxYear])
@@ -86,11 +92,30 @@
     .attr("x", d =>{
       return xScale(d.year)-padding;
     })
-    .attr("y", d => yScale(d.month)-padding-50)
-    .attr("width", "10px")
-    .attr("height", "45px")
+    .attr("y", d => yScale(d.month)-padding-45)
+    .attr("width", Math.floor((w - padding*2) / (maxYear-minYear)) + "px")
+    .attr("height", Math.floor((h - padding*2) / 12) + "px")
     .attr("fill", d => colorScale(d.variance))
-
+    .on("mouseover", (e, d)=>{
+        const {year, month, variance} = d;
+        tooltip
+        .attr("data-year", year)
+        .attr("data-gdp", d[1])
+        .style("display", "block")
+        .style("left", `${e.pageX + 10}px`)
+        .style("top", `${e.pageY + 10}px`)
+        .html(
+          `
+            <p>Month: ${months[month]} </p>
+            <p>Year: ${year} </p>
+            <p>Variance: ${variance}</p>
+          `
+        )
+        
+      })
+      .on("mouseout", (e, d)=>{
+          tooltip.style("display", "none")
+          })
     
   }
 
