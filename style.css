@@ -11,16 +11,16 @@ body{
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-weight: thin;
-  background: rgb(171,150,32);
-  background: linear-gradient(340deg, rgba(171,150,32,0) 90%, rgba(247,255,0,1) 100%);
 }
 
 #title{
-  font-size: 22px;
+  font-size: 30px;
   margin: 2rem;
+  text-align: center;
 }
 
 #description{
-  font-size: 16px;
+  font-size: 20px;
+  text-align: center;
   margin: 0.5rem;
 }

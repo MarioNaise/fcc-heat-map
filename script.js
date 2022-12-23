@@ -12,8 +12,8 @@
     const dataset = data.monthlyVariance;
     const { baseTemperature } = data;
 
-    const w = 1100;
-    const h = 600;
+    const w = 800;
+    const h = 400;
     const padding = 80;
 
     const minYear = d3.min(dataset, (d)=>d.year);
