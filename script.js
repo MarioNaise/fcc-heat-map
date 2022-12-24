@@ -18,17 +18,17 @@
       d.month = d.month-1;
     })
 
-    const w = 1500;
-    const h = 700;
-    const legendW = 300;
-    const legendH = 200;
+    const w = 1200;
+    const h = 500;
+    const legendW = 600;
+    const legendH = 100;
     const legendPadding = 20;
     const padding = 80;
 
     const minYear = d3.min(dataset, (d)=>d.year);
     const maxYear = d3.max(dataset, (d)=>d.year);
-    const minMonth = d3.min(dataset, (d)=>d.month);
-    const maxMonth = d3.max(dataset, (d)=>d.month);
+    const minTemp = d3.min(dataset, (d)=>d.variance);
+    const maxTemp = d3.max(dataset, (d)=>d.variance);
 
     // SET DESCRIPTION
     d3.select("#description")
@@ -48,10 +48,23 @@
       .attr("id", "tooltip")
 
     // LEGEND
+    const legendScale = d3.scaleLinear()
+      .domain([baseTemperature + minTemp, baseTemperature + maxTemp])
+      .range([legendPadding, legendW - legendPadding]);
+
+    const legendAxis = d3.axisBottom(legendScale)
+    
     const legend = d3
-      .select("body")
-      .append("div")
+      .select("main")
+      .append("svg")
       .attr("id", "legend")
+      .attr("width", legendW)
+      .attr("height", legendH)
+
+    legend.append("g")
+       .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
+       .call(legendAxis)
+       .attr("id", "x-axis");
 
     // SET SCALES
     const xScale = d3.scaleLinear()

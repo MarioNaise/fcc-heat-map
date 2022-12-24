@@ -13,6 +13,13 @@ body{
   font-weight: thin;
 }
 
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .cell:hover{
   outline: 1px solid black;
 }
