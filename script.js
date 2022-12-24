@@ -47,25 +47,7 @@
       .append("div")
       .attr("id", "tooltip")
 
-    // LEGEND
-    const legendScale = d3.scaleLinear()
-      .domain([baseTemperature + minTemp, baseTemperature + maxTemp])
-      .range([legendPadding, legendW - legendPadding]);
-
-    const legendAxis = d3.axisBottom(legendScale)
     
-    const legend = d3
-      .select("main")
-      .append("svg")
-      .attr("id", "legend")
-      .attr("width", legendW)
-      .attr("height", legendH)
-
-    legend.append("g")
-       .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
-       .call(legendAxis)
-       .attr("id", "x-axis");
-
     // SET SCALES
     const xScale = d3.scaleLinear()
       .domain([minYear, maxYear])
@@ -135,6 +117,42 @@
       .on("mouseout", (e, d)=>{
           tooltip.style("display", "none")
           })
+
+    // LEGEND
+    const legendScale = d3.scaleLinear()
+      .domain([baseTemperature + minTemp, baseTemperature + maxTemp])
+      .range([legendPadding, legendW - legendPadding]);
+
+    const legendAxis = d3.axisBottom(legendScale)
+    
+    const legend = d3
+      .select("main")
+      .append("svg")
+      .attr("id", "legend")
+      .attr("width", legendW)
+      .attr("height", legendH)
+
+    legend.append("g")
+       .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
+       .call(legendAxis)
+       .attr("id", "legend-axis");
+
+
+    // LEGEND CELLS
+    const tempArr = [...Array(Math.floor(baseTemperature + maxTemp)).keys()]
+    .filter((num)=> num >= (baseTemperature+minTemp))
+
+    legend.selectAll("rect")
+    .data(tempArr)
+    .enter()
+    .append("rect")
+    .attr("class", "legendCell")
+    .attr("fill", d => colorScale(d-baseTemperature))
+    .attr("x", d => legendScale(d))
+    .attr("y", padding-(legendW - padding)/tempArr.length)
+    .attr("height", (legendW - padding)/tempArr.length)
+    .attr("width", (legendW - padding)/tempArr.length)
+
     
   }
 

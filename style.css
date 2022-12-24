@@ -24,6 +24,10 @@ main{
   outline: 1px solid black;
 }
 
+.legendCell{
+  outline: 1px solid black;
+}
+
 #title{
   font-size: 30px;
   margin: 2rem;
