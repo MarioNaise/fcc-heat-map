@@ -148,9 +148,9 @@
     .attr("class", "legendCell")
     .attr("fill", d => colorScale(d-baseTemperature))
     .attr("x", d => legendScale(d))
-    .attr("y", padding-(legendW - padding)/tempArr.length)
-    .attr("height", (legendW - padding)/tempArr.length)
-    .attr("width", (legendW - padding)/tempArr.length)
+    .attr("y", legendPadding)
+    .attr("height", (legendW - legendPadding)/tempArr.length)
+    .attr("width", (legendW - legendPadding)/tempArr.length)
 
     
   }
