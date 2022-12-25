@@ -1,6 +1,5 @@
 (function(){
   const dataUrl = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json";
- colors = ["#4575B4", "#74ADD1", "#ABD9E", "#E0F3F8", "#FFFFBF", "#FEE090", "#FDAE61", "#F46D43", "#D73027"],
   months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   const getData = async () => {
@@ -57,9 +56,9 @@
       .domain(months)
       .range([padding, h - padding])
 
-    const colorScale = d3.scaleLinear()
-      .domain(d3.extent(dataset,(d)=>d.variance))
-      .range(["yellow", "red"])
+    const colorScale = d3.scaleSequential()
+      .domain([d3.max(dataset,(d)=>d.variance), d3.min(dataset,(d)=>d.variance)])
+      .interpolator(d3.interpolateSpectral);
 
     
     // APPEND AXES
